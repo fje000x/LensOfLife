@@ -1,12 +1,13 @@
 
 /* This is the first view of the page where the form exists*/
 .container{
-    background-color: #4a5759;
+    background:linear-gradient(slategray,lightblue);
     width:100%;
     height:100vh;
     display:flex ;
     align-items: center;
     justify-content: center;
+    letter-spacing: .1em;
 }
 .container img {
     align-self: center;
@@ -30,8 +31,10 @@
     height:2.3em;
     padding:1em;  
     margin:.6em;
-    background-color: white;
+    background-color: black;
     border:none ;
+    color:white;
+    border-radius: 1em;
     
     
 }
@@ -43,7 +46,7 @@
 .container form label{
     align-self: flex-start;
     padding-left:1em;
-    font-size: larger;
+    font-size: 1em;
     
 }
 .container form button {
@@ -52,7 +55,10 @@
     width:12em;
     height:3em;
     background-color: black;
-    border-radius: 1.5em;
+    border-radius: 3em;
+    outline: none;
+    border: 1px solid white;
+    color:white;
    
 }
 .container form p , a {
