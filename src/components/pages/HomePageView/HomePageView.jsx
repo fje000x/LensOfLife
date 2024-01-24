@@ -1,3 +1,4 @@
+import { Button } from 'bootstrap';
 import React, { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import styles from './HomePageView.module.css';
@@ -8,7 +9,7 @@ function HomePageView() {
 
   // Array of images for the gallery (replace with your actual image URLs)
   const images = ['social.svg', 'explore.svg', 'inspire.svg'];
-
+  
   // Swipe handlers for the image gallery
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => setCurrentIndex(currentIndex + 1 < images.length ? currentIndex + 1 : currentIndex),
@@ -49,10 +50,26 @@ function HomePageView() {
             
           />
         )}
-       
+
+<div className={styles.dotsContainer}>
+  {images.map((image, index) => (
+    <span 
+      key={index}
+      className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
+    ></span>
+  ))}
+</div>
+    
+      <h3>Create Your First Post </h3>
+      <div className={styles.buttons}>
+        
+        <button>SIGN UP</button>
+        <button>LOGIN</button>
       </div>
-      <p>(Swipe)</p>
-        <h3>Express Yourself</h3>
+
+      </div>
+
+
       </div>
     </div>
   );
