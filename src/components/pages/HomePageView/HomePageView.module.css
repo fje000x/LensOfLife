@@ -1,78 +1,192 @@
+/* 
+    Global Styles 
+*/
+.whole{
+    letter-spacing: .1em; /* Global letter spacing */
+    font-weight: lighter;
+}
 
-/* This is the first view of the page where the form exists*/
-.container{
-    background:linear-gradient(slategray,lightblue);
-    width:100%;
-    height:100vh;
-    display:flex ;
+/* 
+    Container Styles 
+*/
+.container {
+    background: linear-gradient(slategray, lightblue);
+    width: 100%;
+    height: 100vh;
+    display: flex;
     align-items: center;
     justify-content: center;
-    letter-spacing: .1em;
 }
-.container img {
+
+/* 
+    Image Styles 
+*/
+.container img,
+.container2 img {
     align-self: center;
-    width:14em;
+    width: 100%;
     height: auto;
     margin-bottom: 2em;
 }
-.container form{
+
+/* 
+    Form Styles 
+*/
+.container form {
     display: flex;
     flex-direction: column;
     width: 70%;
     padding: 10px;
-   
-}
-.containUsername{
-    margin:1em;
-}
-.container form input{
-    width:90%;
-    align-self: center;
-    height:2.3em;
-    padding:1em;  
-    margin:.6em;
-    background-color: black;
-    border:none ;
-    color:white;
-    border-radius: 1em;
-    
-    
-}
-.container form input:focus{
-    outline: none;
-    
 }
 
-.container form label{
-    align-self: flex-start;
-    padding-left:1em;
-    font-size: 1em;
+.container form input {
+    width: 90%;
+    align-self: center;
+    height: 3em;
+    padding: 1em;
     
+    margin: .6em;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 1em;
 }
+
+.container form input:focus {
+    outline: none;
+}
+
+.container form label {
+    align-self: flex-start;
+    padding-left: 1em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
 .container form button {
     align-self: center;
-    margin:1em;
-    width:12em;
-    height:3em;
+    margin: 1em;
+    width: 12em;
+    height: 3em;
     background-color: black;
     border-radius: 3em;
     outline: none;
     border: 1px solid white;
-    color:white;
-   
-}
-.container form p , a {
-
-align-self: center;
-color:white ;
+    color: white;
 }
 
+.container form p, a {
+    align-self: center;
+    color: white;
+}
 
-
-/* This is the first view of the page <belo> the form exists*/
-
-.container2{
+/* 
+    Second Container Styles 
+*/
+.container2 {
     background-color: lightblue;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container2 h1 {
+    color: #118AB2;
+}
+
+/* 
+    Gallery Container Styles 
+*/
+.galleryContainer {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width:100%;
-    height:100vh;
+    
+    height:auto ;
+    padding: 1em;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1em;
+    border-radius: 20%;
+    overflow: hidden;
+    
+   
+    
+  
+}
+
+/* 
+    Gallery Image Styles 
+*/
+.galleryImage {
+
+    flex:3 ;
+    height:auto ;
+    background-color: #3C3C3B;
+    padding: 1em;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    border-radius: 20%;
+    border:none ;
+    box-shadow: 
+    0px 0px 20px rgba(0, 0, 0, 0.5), /* Outer shadow with spread */
+    inset 0px 0px 10px rgba(0, 0, 0, 0.5); /* Inner shadow */
+}
+    
+    
+
+
+
+.container2 h3 {
+    font-family: cursive ;
+    color:#118AB2;
+    font-weight: bolder;
+    font-size:2em;
+}
+
+.bold {
+    font-size: larger;
+    font-weight: bold;
+}
+.container2 p {
+    font-weight: bold;
+}
+/* 
+    Media Queries 
+*/
+
+
+@media (min-width: 600px) {
+    .container img {
+        width: 7em;
+    }
+
+    .container form input {
+        width: 70%;
+    }
+
+    .container form label {
+        padding-left: 4em;
+    }
+    .galleryContainer {
+        width: 50%;
+        height:auto;
+        margin:auto ;
+        
+    }
+    .galleryImage{
+        width:50%;
+    }
+    .container2{
+        height:auto;
+        padding:3em;
+        
+    }
+   
 }
