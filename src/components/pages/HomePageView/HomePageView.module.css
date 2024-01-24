@@ -10,7 +10,7 @@
 }
 .container img {
     align-self: center;
-    width:11em;
+    width:14em;
     height: auto;
     margin-bottom: 2em;
 }
@@ -27,9 +27,9 @@
 .container form input{
     width:90%;
     align-self: center;
-    height:2em;
+    height:2.3em;
     padding:1em;  
-    margin:.5em;
+    margin:.6em;
     background-color: white;
     border:none ;
     
@@ -43,13 +43,16 @@
 .container form label{
     align-self: flex-start;
     padding-left:1em;
+    font-size: larger;
     
 }
 .container form button {
     align-self: center;
     margin:1em;
     width:12em;
-    height:2em;
+    height:3em;
+    background-color: black;
+    border-radius: 1.5em;
    
 }
 .container form p , a {
