@@ -1,4 +1,4 @@
-import { Button } from 'bootstrap';
+
 import React, { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import styles from './HomePageView.module.css';
@@ -19,7 +19,7 @@ function HomePageView() {
   return (
     <div className={styles.whole}>
       <div className={styles.container}>
-        <form>
+        <form >
           <img src="logo.svg" alt="Logo" />
 
           <label htmlFor="username">Username</label>
