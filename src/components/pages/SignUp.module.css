@@ -1,16 +1,92 @@
 
-.color{
-    color:black ;
-}
 
-.errorMessage{
-    color:black;
-}
-
-.login{
-    color:black ;
-}
-
+.signupContainer {
+    color:#014f86;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* This centers the content vertically */
+    justify-content: center; /* This centers the content horizontally */
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+   flex-direction: column;
+   background: linear-gradient(slategray, skyblue);
+  }
+  
+  .signupForm {
+    margin-top: auto;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%; /* or max-width if you want to limit the form width */
+    box-sizing: border-box; /* Ensures padding and border are included in the width and height */
+    background: url(/Users/nandocodes/LensOfLife/LensOfLife/public/5636275.jpg); 
+    background-size: cover;
+    padding:1em;
+    text-align: center;
+    height:70vh;
+    border-radius: 1em;
+   
+  }
 .link{
-    color:black;
+    color:#014f86 ;
 }
+  .inputContainer{
+    display: flex;
+    flex-direction: column;
+  }
+  .inputField{
+    background-color: transparent; /* Remove default background */
+    border: none; /* Remove default border */
+    outline: none; /* Remove focus highlight */
+    padding: 0; /* Remove default padding */
+    margin: 1em; /* Remove default margin */
+    font-family: inherit; /* Use font from parent */
+    font-size: inherit; /* Use font size from parent */
+    color:#222; /* Use font color from parent */
+    line-height: inherit; /* Use line height from parent */
+    border-bottom:1px solid #222 ;
+    border-radius: 0;
+  }
+
+  .inputField::placeholder{
+    color:#014f86;
+    
+  }
+ 
+
+  .submitButton{
+    width:10em;
+    height:3em;
+    margin-top:1em;
+    border-radius: -30;
+    background-color: #014f86;
+  }
+
+  .errorMessage{
+    color:red ;
+    
+  }
+
+  .signupHeader{
+    margin-bottom:2em;
+    font-weight: bolder;
+
+  }
+.footer{
+    margin-top:auto ;
+        color: #014f86;
+        height: 3em; 
+        width: 100%; 
+        bottom: 0; 
+        text-align: center;
+        font-size: smaller;
+        padding:em;
+       
+    
+}
+
+  

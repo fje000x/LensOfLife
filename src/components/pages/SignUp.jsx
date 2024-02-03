@@ -42,13 +42,13 @@ function Signup() {
   }
   return (
     <div className={styles.signupContainer}>
-        <div className={styles.headerContainer}>
-          <h1 className={styles.color}>Join Our Community </h1>
-        </div>
+       
         <form onSubmit={handleSignUp} className={styles.signupForm}>
-            <h2 className={styles.signupHeader}>Join Our Community</h2>
+            <h2 className={styles.signupHeader}>Sign Up</h2>
+            <p className={styles.login}>Already have an Account ? <Link className={styles.link} to={'/home'}>Login</Link></p>
             {error && <p className={styles.errorMessage}>{error}</p>}
             <div className={styles.inputContainer}>
+             
                 <input
                     className={styles.inputField}
                     value={email}
@@ -56,6 +56,7 @@ function Signup() {
                     type="email"
                     placeholder="Email"
                 />
+                
                 <input
                     className={styles.inputField}
                     value={password}
@@ -65,9 +66,11 @@ function Signup() {
                 />
             </div>
             <button className={styles.submitButton} type="submit">Sign Up</button>
-            <p className={styles.login}>Already have an Account ? <Link className={styles.link} to={'/home'}>Login</Link></p>
+           
         </form>
+        <footer className={styles.footer}>
         <p className={styles.footerText}>Join the community and show us your world.</p>
+        </footer>
     </div>
 );
 }
