@@ -55,7 +55,9 @@
 .container form input:focus {
     outline: none;
 }
-
+.inputText{
+    font-size: smaller;
+}
 .container form label {
     align-self: flex-start;
     padding-left: 1em;
@@ -74,7 +76,9 @@
     border: 1px solid white;
     color: white;
 }
-
+.signup {
+    text-decoration: underline;
+}
 .container form p, a {
     align-self: center;
     color: white;
@@ -204,7 +208,7 @@
 */
 
 
-@media (min-width: 600px) {
+@media (min-width: 540px) {
     .container img {
         width: 7em;
     }
@@ -223,7 +227,7 @@
         
     }
     .galleryImage{
-        width:50%;
+        min-width:40%;
     }
     .container2{
         height:auto;

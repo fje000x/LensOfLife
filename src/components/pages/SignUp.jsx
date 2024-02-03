@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import styles from "/Users/nandocodes/LensOfLife/LensOfLife/src/components/pages/SIgnUp.module.css";
-
+import styles from "/src/components/pages/SignUp.module.css";
+import { Link } from "react-router-dom";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,6 +65,7 @@ function Signup() {
                 />
             </div>
             <button className={styles.submitButton} type="submit">Sign Up</button>
+            <p className={styles.login}>Already have an Account ? <Link className={styles.link} to={'/home'}>Login</Link></p>
         </form>
         <p className={styles.footerText}>Join the community and show us your world.</p>
     </div>
