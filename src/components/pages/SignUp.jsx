@@ -1,109 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import { getAuth } from 'firebase/auth';
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useNavigate } from 'react-router-dom';
-import styles from '/Users/nandocodes/LensOfLife/LensOfLife/src/components/EditProfile.module.css';
+import { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import styles from "/src/components/pages/SignUp.module.css";
+import { Link } from "react-router-dom";
+import { database } from "../../main";
+import { doc, setDoc } from "firebase/firestore"; // Correctly import setDoc
 
-const EditProfile = () => {
+function Signup() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
+  
   const auth = getAuth();
-  const db = getFirestore();
-  const storage = getStorage();
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
-  const [profilePicturePreview, setProfilePicturePreview] = useState('');
-  const [file, setFile] = useState(null);
-
-  useEffect(() => {
-    if (auth.currentUser) {
-      const uid = auth.currentUser.uid;
-      const userDocRef = doc(db, 'users', uid);
-      getDoc(userDocRef).then(docSnap => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setUsername(data.username);
-          setEmail(data.email);
-          setProfilePicture(data.profilePicture);
-          // Initially, the preview is the current profile picture from the database
-          setProfilePicturePreview(data.profilePicture);
-        }
-      });
-    }
-  }, [auth, db]);
-
-  const handleProfilePictureChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFile(file);
-      // Create a preview of the selected image
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePicturePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+  
+  const getCustomErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/email-already-in-use":
+        return "This email is already in use.";
+      case "auth/invalid-email":
+        return "Invalid email address.";
+      case "auth/weak-password":
+        return "Password is too weak.";
+      default:
+        return "An unexpected error occurred.";
     }
   };
 
-  const handleSave = async () => {
-  if (!auth.currentUser) return;
-  const uid = auth.currentUser.uid;
-  const userDocRef = doc(db, 'users', uid);
-
-  let newProfilePicture = profilePicture;
-  if (file) {
-    // Corrected to include the file name in the path to make it unique for each upload
-    const fileRef = storageRef(storage, `profilePictures/${uid}/${file.name}`);
-    await uploadBytes(fileRef, file); // Upload the file
-    newProfilePicture = await getDownloadURL(fileRef); // Get the URL of the uploaded file
-
-    // This line is likely incorrect as getDownloadURL should be called on the reference returned by uploadBytes
-    // Correct approach:
-    newProfilePicture = await getDownloadURL(fileRef); // Ensure we get the URL of the newly uploaded file
-    setProfilePicture(newProfilePicture); // Optionally update the state if you want to immediately reflect the change
+  function getRandomPicture() {
+    const imgs = ['profile1.svg', 'profile2.svg', 'profile3.svg'];
+    const randomIndex = Math.floor(Math.random() * imgs.length); // Generate a random index
+    return imgs[randomIndex]; // Return the randomly selected image filename
   }
 
-  // Proceed to update the Firestore document
-  try {
-    await updateDoc(userDocRef, {
-      username: username,
-      email: email,
-      profilePicture: newProfilePicture,
-    });
-    navigate('/userhome'); // Redirect after saving
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    // Consider handling the error in your UI
+  async function handleSignUp(event) {
+    event.preventDefault();
+    setError(""); // Reset error message
+    const profilePicture = getRandomPicture();
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const userData = {
+          email: email,
+          username: username,
+          profilePicture: profilePicture, // Assign the randomly selected profile picture
+        };
+
+        // Correct reference to Firestore document
+        const userDocRef = doc(database, 'users', user.uid);
+        
+        // Correctly use setDoc to add the document
+        setDoc(userDocRef, userData)
+          .then(() => {
+            console.log('User data added to Firestore with UID as document ID');
+            setEmail("");
+            setPassword("");
+            setUsername(""); // Reset username after successful sign-up
+            navigate("/userhome"); // Navigate to userhome
+          })
+          .catch((error) => {
+            console.error('Error adding user data to Firestore:', error);
+            setError('Failed to add user data to Firestore.'); // Provide a generic error message
+          });
+      })
+      .catch((error) => {
+        const customMessage = getCustomErrorMessage(error.code);
+        setError(customMessage); // Set custom error message
+      });
   }
-};
 
   return (
-    <div className={styles.container}>
-      <input
-        className={styles.inputField}
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        className={styles.inputField}
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <img src={profilePicturePreview || profilePicture} alt="Profile" className={styles.profileImage} />
-      <input
-        className={styles.inputField}
-        type="file"
-        accept="image/*"
-        onChange={handleProfilePictureChange}
-      />
-      <button className={styles.saveButton} onClick={handleSave}>Save Changes</button>
-    </div>
+    
+      <div className={styles.signupContainer}>
+        <form onSubmit={handleSignUp} className={styles.signupForm}>
+          <h2 className={styles.signupHeader}>Sign Up</h2>
+          <p className={styles.login}>Already have an Account ? <Link to={'/home'}>Login</Link></p>
+          {error && <p className={styles.errorMessage}>{error}</p>}
+          <div className={styles.inputContainer}>
+            <input
+              className={styles.inputField}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              placeholder="Username"
+            />
+            <input
+              className={styles.inputField}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              className={styles.inputField}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <button className={styles.submitButton} type="submit">Sign Up</button>
+        </form>
+        <footer className={styles.footer}>
+          <p className={styles.footerText}>Join the community and show us your world.</p>
+        </footer>
+      </div>
   );
-};
+}
 
-export default EditProfile;
+export default Signup;
