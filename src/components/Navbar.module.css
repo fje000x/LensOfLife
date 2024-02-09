@@ -1,0 +1,39 @@
+.navbar  {
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; /* Adjust as needed */
+    padding: 10px 20px;
+    border-top: 1px solid grey;
+   
+   
+}
+.ul{
+   
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.ul li  {
+    font-size: 1em;
+    text-decoration: none;
+    list-style: none;
+    text-align: center;
+    color:#01377D;
+    align-self: center;
+    
+    
+}
+.ul li a{
+    color:#01377D;
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+.ul li p {
+    font-size: .7em;
+}
+.ul li svg{
+    cursor: pointer;
+}

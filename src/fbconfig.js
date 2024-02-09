@@ -1,5 +1,6 @@
 
-export default{
+
+const fbconfig= {
   apiKey: "AIzaSyAisXJ2ScKZxEWgQad1Wjw0-LtFaj6LTDs",
   authDomain: "lens-of-life.firebaseapp.com",
   projectId: "lens-of-life",
@@ -8,3 +9,4 @@ export default{
   appId: "1:16915335364:web:51a2cf4c4901ef4292a191"
 };
 
+export {fbconfig}

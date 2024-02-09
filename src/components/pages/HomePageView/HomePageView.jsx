@@ -27,6 +27,7 @@ function HomePageView() {
   };
 
   async function handleSignIn(event) {
+
     event.preventDefault();
     setError(""); // Reset error message
 
@@ -45,7 +46,7 @@ function HomePageView() {
 
   // State to track the current image index in the gallery
   const [currentIndex, setCurrentIndex] = useState(0);
-  const images = ["social.svg", "explore.svg", "inspire.svg"];
+  const images = ["social.webp", "explore.webp", "inspire.webp"];
 
   // Swipe handlers for the image gallery
   const swipeHandlers = useSwipeable({
@@ -69,9 +70,9 @@ function HomePageView() {
     <div className={styles.whole}>
       <div className={styles.container}>
         <form onSubmit={handleSignIn}>
-          <img src="logo.svg" alt="Logo" />
+          <img src="logo.webp" alt="Logo" />
 
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Email</label>
           <input
             className={styles.input}
             type="text"

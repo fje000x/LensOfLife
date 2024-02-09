@@ -12,7 +12,7 @@
     width: 100%;
     height: 100vh; /* Full height of the viewport */
    flex-direction: column;
-   background: linear-gradient(slategray, skyblue);
+   background: linear-gradient(#708090, #87ceeb);
   }
   
   .signupForm {
@@ -23,7 +23,7 @@
     justify-content: center;
     width: 80%; /* or max-width if you want to limit the form width */
     box-sizing: border-box; /* Ensures padding and border are included in the width and height */
-    background: url(/Users/nandocodes/LensOfLife/LensOfLife/public/5636275.jpg); 
+    background: url(/5636275.webp); 
     background-size: cover;
     padding:1em;
     text-align: center;
@@ -88,5 +88,10 @@
        
     
 }
+.login a{
+  color:#014f86;
+}
 
-  
+.login {
+  margin-bottom:2em;
+}

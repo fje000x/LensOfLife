@@ -213,7 +213,7 @@
 
 @media (min-width: 540px) {
     .container img {
-        width: 7em;
+        width: 20em;
     }
 
     .container form input {
@@ -230,7 +230,7 @@
         
     }
     .galleryImage{
-        min-width:40%;
+        min-width:70%;
     }
     .container2{
         height:auto;
