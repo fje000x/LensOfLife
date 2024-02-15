@@ -1,13 +1,57 @@
-import React from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
-import styles from "/src/components/Navbar.module.css";
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom'; // Added useLocation
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import styles from '/src/components/Navbar.module.css';
 
 const Navbar = () => {
+
   const navigate = useNavigate();
   const location = useLocation();
   const auth = getAuth();
-
+  const [profilePicture, setProfilePicture] = useState('');
+  const [loading, setLoading] = useState(true);
+  const db = getFirestore();
+  useEffect(() => {
+      
+      const cachedProfile = localStorage.getItem('profilePicture');
+      
+      if (cachedProfile) {
+     
+        setProfilePicture(cachedProfile);
+      }
+  
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const uid = user.uid;
+          const userDocRef = doc(db, 'users', uid);
+  
+          try {
+            const docSnap = await getDoc(userDocRef);
+  
+            if (docSnap.exists()) {
+              const fetchedData = docSnap.data();
+              
+              setProfilePicture(fetchedData.profilePicture);
+            
+          
+              localStorage.setItem('profilePicture', fetchedData.profilePicture);
+            } else {
+              console.log("No such document!");
+            }
+          } catch (error) {
+            console.error("Error getting document:", error);
+          } finally {
+            setLoading(false);
+          }
+        } else {
+          console.log('User is signed out');
+          setLoading(false);
+        }
+      });
+  
+      return () => unsubscribe();
+    }, [auth, db]);
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -40,20 +84,14 @@ const Navbar = () => {
        
         <li>
           <Link to="/userhome">
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              version="1.2"
-              baseProfile="tiny"
-              viewBox="0 0 24 24"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 6c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3m0-2c-2.764 0-5 2.238-5 5s2.236 5 5 5 5-2.238 5-5-2.236-5-5-5zM12 17c2.021 0 3.301.771 3.783 1.445-.683.26-1.969.555-3.783.555-1.984 0-3.206-.305-3.818-.542.459-.715 1.777-1.458 3.818-1.458m0-2c-3.75 0-6 2-6 4 0 1 2.25 2 6 2 3.518 0 6-1 6-2 0-2-2.354-4-6-4z"></path>
-            </svg>
-            <p>Profile</p>
+          {profilePicture ? <img className={styles.profile} src={profilePicture} alt="Profile" /> : <p>No Profile Pic</p>}
+          </Link>
+        </li>
+        <li>
+          <Link to="/create">
+           
+            
+            <p>POST</p>
           </Link>
         </li>
 

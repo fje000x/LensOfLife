@@ -6,7 +6,8 @@ import SignUp from './components/pages/SignUp';
 import UserHome from './components/pages/UserHome';
 import {Protected} from './components/Protected'; // Assuming Protected is correctly implemented
 import EditProfile from './components/EditProfile';
-import ExplorePage from './components/explore';
+import ExplorePage from './components/Explore';
+import CreatePost from './components/CreatePost';
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
         <Route path='/userhome' element={<Protected><UserHome/> <Navbar /></Protected>} />
         <Route path='/edit' element={<Protected><EditProfile/> <Navbar /></Protected>} />
         <Route path='/explore' element={<Protected><ExplorePage/> <Navbar /></Protected>} />
+        <Route path='/create' element={<Protected><CreatePost/> <Navbar /></Protected>} />
       </Routes>
     </>
   );
