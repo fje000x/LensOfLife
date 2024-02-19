@@ -1,10 +1,13 @@
-/* 
-    Global Styles 
-*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .whole{
     letter-spacing: .1em; /* Global letter spacing */
     font-weight: lighter;
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    
 }
 
 /* 
@@ -12,7 +15,7 @@
 */
 .container {
     background: linear-gradient(slategray, skyblue);
-    width: 100%;
+    max-width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -37,6 +40,7 @@
     flex-direction: column;
     width: 70%;
     padding: 10px;
+    
 }
 
 .container form input {
@@ -44,12 +48,12 @@
     align-self: center;
     height: 3em;
     padding: 1em;
-    
     margin: .6em;
     background-color: black;
     border: none;
     color: white;
     border-radius: 1em;
+    font-size: 16px; 
 }
 
 .container form input:focus {
@@ -192,19 +196,39 @@
 }
 
 
-.buttons{
+.buttons {
     display: flex;
     flex-direction: row;
-    gap:1em;
+    gap: 1em;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
+
 .buttons button {
-    width:10em ;
-    height:3em;
+    padding: 0 2em;
+    height: 2em;
     background-color: #3C3C3B;
     border-radius: 3em;
     font-weight: bold;
-    color:white ;
+    color: white;
+    font-size: 1em; /* Adjust as needed */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover and focus */
 }
+
+.buttons button:hover {
+    background-color: #333; /* Slightly darker on hover */
+}
+
+.buttons button:active {
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.75); /* Inner shadow for active state */
+}
+
+.buttons button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.75); /* White outline for focus state */
+}
+
 
 /*
     Media Queries 
@@ -224,17 +248,19 @@
         padding-left: 4em;
     }
     .galleryContainer {
-        width: 50%;
+        width: 40%;
         height:auto;
         margin:auto ;
         
     }
     .galleryImage{
-        min-width:70%;
+        min-width:50%;
     }
+
     .container2{
         height:auto;
         padding:3em;
+        width:100%;
         
     }
    

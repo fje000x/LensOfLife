@@ -1,0 +1,22 @@
+
+
+.ul{
+    display: grid;
+    grid-template-columns:1fr 1fr ;
+    color:white ;
+    text-align: center;
+    background-color: #01377D;
+    height:6vh ;
+
+}
+
+.items, .logoItem{
+    list-style: none;
+    padding:1em;
+    letter-spacing: .1em;
+}
+
+.logoItem{
+    font-family: Bodoni;
+    font-weight: 900;
+}

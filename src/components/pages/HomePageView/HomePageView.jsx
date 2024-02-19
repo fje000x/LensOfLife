@@ -130,12 +130,13 @@ function HomePageView() {
             ))}
           </div>
 
-          <h3>Create Your First Post </h3>
+         
+        </div>
+        <h3>Create Your First Post </h3>
           <div className={styles.buttons}>
             <button  onClick={() => navigate("/signup")}>SIGN UP</button>
             <button onClick={scrollToTop}>LOGIN</button>
           </div>
-        </div>
       </div> 
     </div>
   );

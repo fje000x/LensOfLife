@@ -4,6 +4,9 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    background-color: #FDFCFA;
+    height:100vh;
+    
   }
   
   .inputField {
