@@ -16,14 +16,13 @@ function HomePageView() {
   // Function to return custom error messages
   const getCustomErrorMessage = (errorCode) => {
     switch (errorCode) {
-      case "auth/user-not-found":
-        return "No user found with this email.";
-      case "auth/wrong-password":
-        return "Wrong password. Please try again.";
-      case "auth/user-disabled":
-        return "This account has been disabled.";
+      case "auth/invalid-credential":
+        return "Incorrect Email or Password ";
+      case "auth/too-many-requests":
+        return "This account has been disabled.Please reset Password or try again later";
       case "auth/invalid-email":
         return "Invalid email address format.";
+      
       default:
         return "An unexpected error occurred. Please try again.";
     }
@@ -40,6 +39,7 @@ function HomePageView() {
         navigate("/userhome"); // Navigate on successful login
       })
       .catch((error) => {
+        console.log(error)
         const customMessage = getCustomErrorMessage(error.code);
         setError(customMessage); // Set custom error message
       });

@@ -1,8 +1,8 @@
 
 import styles from '/src/components/TopNavbar.module.css';
-import React, { useState, useEffect } from 'react';
-import {Link, useNavigate,  } from 'react-router-dom'; // Added useLocation
-import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
+import React from 'react';
+import {useNavigate,  } from 'react-router-dom'; // Added useLocation
+import { getAuth, signOut, } from 'firebase/auth';
 
 
 

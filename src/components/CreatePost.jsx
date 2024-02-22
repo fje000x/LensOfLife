@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import {
-  getStorage,
-  ref as firebaseRef,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
+import { getStorage, ref as firebaseRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import styles from "/src/components/CreatePost.module.css";
-
 import { useNavigate } from "react-router-dom";
+import { usePosts } from '/src/Context/PostsContext.jsx'; // Import usePosts hook
+
 const CreatePost = () => {
   const auth = getAuth();
   const db = getFirestore();
@@ -18,6 +14,8 @@ const CreatePost = () => {
   const [description, setDescription] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const navigate = useNavigate();
+  const { addPost } = usePosts(); // Use the addPost function from the context
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -35,10 +33,8 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Fixed condition: Ensure both a file is selected and a description is provided
     if (!file) {
-      alert("A post must have an image ");
+      alert("A post must have an image");
       return;
     }
 
@@ -48,21 +44,24 @@ const CreatePost = () => {
     const fileRef = firebaseRef(storage, fileName);
 
     try {
-      // Upload the image file to Firebase Storage
       await uploadBytes(fileRef, file);
       const imageUrl = await getDownloadURL(fileRef);
 
-      // Create a new document in Firestore for the post
-      const postRef = doc(db, "posts", `${uid}_${timestamp}`);
-      await setDoc(postRef, {
+      const newPost = {
         uid,
         description,
         imageUrl,
         createdAt: timestamp,
-      });
+      };
+
+      // Create a new document in Firestore for the post
+      const postRef = doc(db, "posts", `${uid}_${timestamp}`);
+      await setDoc(postRef, newPost);
+
+      // Here we use the addPost function to update our global posts state
+      addPost(newPost);
 
       alert("Post created!");
-      // Reset form state
       setDescription("");
       setImagePreviewUrl("");
       setFile(null);

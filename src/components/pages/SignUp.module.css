@@ -12,7 +12,7 @@
     width: 100%;
     height: 100vh; /* Full height of the viewport */
    flex-direction: column;
-   background: linear-gradient(#708090, #87ceeb);
+   background: linear-gradient(#708090,rgba(0, 0, 0, 0.8));
   }
   
   .signupForm {
@@ -78,7 +78,7 @@
   }
 .footer{
     margin-top:auto ;
-        color: #014f86;
+        color: lightgrey;
         height: 3em; 
         width: 100%; 
         bottom: 0; 

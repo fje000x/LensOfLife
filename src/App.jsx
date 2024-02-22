@@ -9,6 +9,7 @@ import EditProfile from './components/EditProfile';
 import ExplorePage from './components/Explore';
 import CreatePost from './components/CreatePost';
 import TopNavbar from './components/TopNavbar';
+
 function App() {
   return (
     <>
