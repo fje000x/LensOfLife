@@ -1,75 +1,82 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-    background-color: #FDFCFA;
-    padding: 0.625em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  background-color: #fdfcfa;
+  padding: 0.625em;
+  height: auto;
 }
 .create {
-    color: #00072D;
-    margin-bottom: 1em;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    letter-spacing: 0.05em;
-    font-weight: 500;
+  color: #00072d;
+  margin-bottom: 1em;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
 .upload {
-    border: 0.125em solid #4A90E2;
-    border-radius: 1em;
-    padding: 0.625em 0.9375em;
-    text-align: center;
-    background-color: #FFFFFF;
-    box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.1);
-    display: inline-block;
-    width: auto;
+  border: 0.125em solid #4a90e2;
+  border-radius: 1em;
+  padding: 0.625em 0.9375em;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  width: auto;
 
-    height: 2.75em;
+  height: 2.75em;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    gap: 1em;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 1em;
 }
 
-.input, .btn {
-    font-size: 1em;
-    height: 2.75em;
-    border-radius: 1em;
-    border: 0.0625em solid #CCCCCC;
+.input,
+.btn {
+  font-size: 17px;
+  height: 2.75em;
+  border-radius: 1em;
+  border: 0.0625em solid #cccccc;
 }
 
 .input::placeholder {
-    text-align: center;
-    color: #AAAAAA;
+  text-align: center;
+  color: #aaaaaa;
 }
 
 .btn {
-    width: 60%;
-    margin: 1.25em auto;
-    background-color: white;
-    color: #00072D;
-    border: none;
-    box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.2);
-    cursor: pointer;
+  width: 60%;
+  margin: 1.25em auto;
+  background-color: white;
+  color: #00072d;
+  border: none;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.input, .btn {
-    padding: 0.625em 0.9375em;
+.input,
+.btn {
+  padding: 0.625em 0.9375em;
 }
 
-.upload:hover, .btn:hover {
-    border: 0.0625em solid #3A78D4;
+.upload:hover,
+.btn:hover {
+  border: 0.0625em solid #3a78d4;
 }
 
-.upload:focus, .input:focus, .btn:focus {
-    outline: none;
-    border-color: #4A90E2;
+.upload:focus,
+.input:focus,
+.btn:focus {
+  outline: none;
+  border-color: #4a90e2;
 }
 
 .img {
-    border-radius: 2.125em;
+  border-radius: 2.125em;
+  height: 40vh;
 }

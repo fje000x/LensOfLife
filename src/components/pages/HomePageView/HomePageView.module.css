@@ -16,10 +16,11 @@
 .container {
     background: linear-gradient(slategray, skyblue);
     max-width: 100%;
-    height: 100vh;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 3em;
 }
 
 /* 
@@ -38,68 +39,92 @@
 .container form {
     display: flex;
     flex-direction: column;
-    width: 70%;
-    padding: 10px;
-    
+    width: 90%;
+    padding: 1.25em;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 0.625em;
+    box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.2);
+    align-items: center;
+    justify-content: center;
+    gap: 0.9375em;
 }
 
-.container form input {
-    width: 90%;
-    align-self: center;
-    height: 3em;
-    padding: 1em;
-    margin: .6em;
-    background-color: black;
-    border: none;
-    color: white;
-    border-radius: 1em;
-    font-size: 16px; 
+.container form input, .container form button {
+    min-width: 90%;
+    height: 2.8125em;
+    padding: 0 1.25em;
+    margin: 0.625em 0;
+    background-color: #222;
+    border: 0.125em solid #bbb;
+    color: #fff;
+    border-radius: 1.5625em;
+    font-size: 17px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .container form input:focus {
     outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.1875em rgba(52, 152, 219, 0.5);
 }
-.inputText{
+
+.inputText {
     font-size: smaller;
 }
+
 .container form label {
-    align-self: flex-start;
-    padding-left: 1em;
-    font-size: .8em;
-    font-weight: 550;
-    color:white
+    width: 90%;
+    text-align: left;
+    font-size: 0.875em;
+    font-weight: normal;
+    color: #bbb;
+    margin-bottom: -0.3125em;
 }
 
 .container form button {
-    align-self: center;
-    margin: 1em;
-    width: 12em;
-    height: 3em;
-    background-color: #3C3C3B;
-    border-radius: 3em;
-    outline: none;
-    border: 1px solid white;
-    color: white;
+    cursor: pointer;
+    background-color: #ADD8E6;
+    color: #222;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out;
 }
+
+.container form button:hover {
+    background-color: #2980b9;
+}
+
 .signup {
-    text-decoration: underline;
+    cursor: pointer;
+    color: #FF7F50;
+    text-decoration: none;
     font-weight: bold;
 }
-.container form p, a {
-    align-self: center;
-    color: white;
-    
+
+.container form p, .container form a {
+    color: #ddd;
+    text-align: center;
 }
 
 .container form p a {
+    color: #3498db;
+    text-decoration: none;
     font-weight: bold;
 }
 
+.errorMessage  {
+    color: red; /* Crimson red */
+    background-color: slategray; /* Very light red/pink for background */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid salmon;
+    border-radius: 5px;
+    font-size: smaller;
+  }
 /* 
     Second Container Styles 
 */
 .container2 {
-    background-color: lightblue;
+    background-color: #222;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -110,7 +135,7 @@
 
 .container2 h1 {
     font-size: 1.6em;
-    color: #118AB2;
+    color: white;
 }
 .container2 img{
     overflow: hidden;
@@ -147,7 +172,7 @@
     overflow: hidden;
     flex:3 ;
     height:auto ;
-    background-color: #3C3C3B;
+    background-color: #ADD8E6;
     padding: 1em;
     flex: 0 0 auto;
     scroll-snap-align: start;
@@ -171,25 +196,28 @@
     height: 10px;
     width: 10px;
     margin: 0 5px;
-    background-color: #bbb;
+    background-color: #444;
     border-radius: 50%;
     display: inline-block;
   }
   
   .activeDot {
-    background-color: #444; /* Change this color to your preferred active color */
+    background-color: #ADD8E6; /* Change this color to your preferred active color */
   }
 
 .container2 h3 {
     margin:1.3em 0;
-    color:#118AB2;
-    font-weight: bolder;
-    font-size:1.2em;
+    color: #FF7F50; /* Bright pink for vibrancy */
+    font-size: 1em; /* Increase size for prominence */
+    text-shadow: 2px 2px 4px #000; /* Soft black shadow for depth */
+
+    font-weight: bold; /* Bold for emphasis */
 }
 
 .bold {
     font-size: larger;
     font-weight: bold;
+    color: #FF7F50;
 }
 .container2 p {
     font-weight: bold;
@@ -203,17 +231,19 @@
     width: 100%;
     align-items: center;
     justify-content: center;
+   
 }
 
 .buttons button {
     padding: 0 2em;
     height: 2em;
-    background-color: #3C3C3B;
-    border-radius: 3em;
+    background-color: #ADD8E6;
+    border-radius: 2em;
     font-weight: bold;
-    color: white;
-    font-size: 1em; /* Adjust as needed */
+    color: #222;
+    font-size: .7em; /* Adjust as needed */
     transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover and focus */
+    letter-spacing: .1em;
 }
 
 .buttons button:hover {
@@ -228,6 +258,7 @@
     outline: none;
     box-shadow: 0 0 0 2px rgba(255,255,255,0.75); /* White outline for focus state */
 }
+
 
 
 /*

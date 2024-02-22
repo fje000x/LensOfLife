@@ -1,46 +1,54 @@
-.navbar  {
+.navbar {
 
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: white; /* Adjust as needed */
+    background-color: white;
+    /* Adjust as needed */
     padding: 10px 20px;
     border-top: 1px solid grey;
-   
-   
+
+
 }
-.ul{
-   
-    display:grid;
+
+.ul {
+
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
-.ul li  {
+
+.ul li {
     font-size: 1em;
     text-decoration: none;
     list-style: none;
     text-align: center;
-    color:#01377D;
+    color: #01377D;
     align-self: center;
-    
-    
+
+
 }
-.ul li a{
-    color:#01377D;
+
+.ul li a {
+    color: #01377D;
     text-decoration: none;
     cursor: pointer;
-    
+
 }
+
 .ul li p {
     font-size: .7em;
 }
-.ul li svg{
+
+.ul li svg {
     cursor: pointer;
+    width: 1.2em;
+    height: 1.2em;
 }
 
 .profile {
-    width: 2em; 
-    height: 2em; 
-    border-radius: 50%; 
-    object-fit: cover; 
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    object-fit: cover;
 }

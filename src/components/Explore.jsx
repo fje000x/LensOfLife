@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useEffect, useState } from 'react';
 import styles from "/Users/nandocodes/LensOfLife/LensOfLife/src/components/Explore.module.css"
 function ExplorePage(){
 return (

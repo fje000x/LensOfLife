@@ -7,36 +7,37 @@ import { useNavigate } from "react-router-dom";
 function HomePageView() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Added state to toggle password visibility
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(""); // Declare the error state here
+
   const auth = getAuth();
   const navigate = useNavigate();
 
   // Function to return custom error messages
   const getCustomErrorMessage = (errorCode) => {
     switch (errorCode) {
-      case "auth/email-already-in-use":
-        return "This email is already in use.";
+      case "auth/user-not-found":
+        return "No user found with this email.";
+      case "auth/wrong-password":
+        return "Wrong password. Please try again.";
+      case "auth/user-disabled":
+        return "This account has been disabled.";
       case "auth/invalid-email":
-        return "Invalid email address.";
-      case "auth/weak-password":
-        return "Password is too weak.";
+        return "Invalid email address format.";
       default:
-        return "An unexpected error occurred.";
-    } 
+        return "An unexpected error occurred. Please try again.";
+    }
   };
 
   async function handleSignIn(event) {
-
     event.preventDefault();
-    setError(""); // Reset error message
+    setError(""); // Reset error message before attempting to sign in
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setEmail("");
         setPassword("");
-        navigate("/userhome");
-        // Handle successful signup
+        navigate("/userhome"); // Navigate on successful login
       })
       .catch((error) => {
         const customMessage = getCustomErrorMessage(error.code);
@@ -44,26 +45,16 @@ function HomePageView() {
       });
   }
 
-  // State to track the current image index in the gallery
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = ["social.webp", "explore.webp", "inspire.webp"];
 
-  // Swipe handlers for the image gallery
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () =>
-      setCurrentIndex(
-        currentIndex + 1 < images.length ? currentIndex + 1 : currentIndex
-      ),
-    onSwipedRight: () =>
-      setCurrentIndex(currentIndex - 1 >= 0 ? currentIndex - 1 : currentIndex),
+    onSwipedLeft: () => setCurrentIndex(currentIndex + 1 < images.length ? currentIndex + 1 : currentIndex),
+    onSwipedRight: () => setCurrentIndex(currentIndex - 1 >= 0 ? currentIndex - 1 : currentIndex),
   });
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (
@@ -84,29 +75,34 @@ function HomePageView() {
           <label htmlFor="password">Password</label>
           <input
             className={styles.input}
-            type={showPassword ? "text" : "password"} // Changes based on showPassword state
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {
-          password && ( // Render the toggle button only if there is input in the password field
-    <p className={styles.inputText} onClick={() => setShowPassword(!showPassword)}>
-      {showPassword ? "Hide" : "Show"} Password
-    </p>
-  )}
+          {password && (
+            <p
+              className={styles.inputText}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "Hide" : "Show"} Password
+            </p>
+          )}
 
           <button type="submit">Login</button>
 
+          {/* Display error message */}
+          {error && <p className={styles.errorMessage}>{error}</p>}
+
           <p onClick={() => navigate("/signup")}>
-            New Here? <span className={styles.signup}> Sign Up</span>
+            New Here? <span className={styles.signup}>Sign Up</span>
           </p>
         </form>
       </div>
 
       <div className={styles.container2}>
-        <h1>
+      <h1>
           Share <span className={styles.bold}>Your</span> World
         </h1>
 
@@ -129,15 +125,13 @@ function HomePageView() {
               ></span>
             ))}
           </div>
-
-         
         </div>
         <h3>Create Your First Post </h3>
-          <div className={styles.buttons}>
-            <button  onClick={() => navigate("/signup")}>SIGN UP</button>
-            <button onClick={scrollToTop}>LOGIN</button>
-          </div>
-      </div> 
+        <div className={styles.buttons}>
+          <button onClick={() => navigate("/signup")}>Sign Up</button>
+          <button onClick={scrollToTop}>Login</button>
+        </div>
+      </div>
     </div>
   );
 }
