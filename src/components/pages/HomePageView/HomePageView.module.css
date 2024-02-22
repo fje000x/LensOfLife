@@ -50,7 +50,7 @@
 }
 
 .container form input, .container form button {
-    min-width: 90%;
+    width: 90%;
     height: 2.8125em;
     padding: 0 1.25em;
     margin: 0.625em 0;

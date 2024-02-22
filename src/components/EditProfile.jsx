@@ -45,52 +45,51 @@ const EditProfile = () => {
     if (!auth.currentUser) return;
     const uid = auth.currentUser.uid;
     const userDocRef = doc(db, "users", uid);
-
+  
     const userDoc = await getDoc(userDocRef);
     const userData = userDoc.exists() ? userDoc.data() : {};
-
-    // Delete the old profile picture if it exists
-    if (userData.profilePictureRef) {
+  
+    // Delete the old profile picture if it exists and a new file is selected
+    if (userData.profilePictureRef && file) {
       const oldFileRef = firebaseRef(storage, userData.profilePictureRef);
       await deleteObject(oldFileRef).catch((error) => {
         console.error("Error deleting old profile picture:", error);
       });
     }
-
+  
     if (file) {
       try {
-        const uniqueFileName = `profilePictures/${uid}/${Date.now()}-${
-          file.name
-        }`;
+        const uniqueFileName = `profilePictures/${uid}/${Date.now()}-${file.name}`;
         const fileRef = firebaseRef(storage, uniqueFileName);
-
+  
         await uploadBytes(fileRef, file);
         const newProfilePictureUrl = await getDownloadURL(fileRef);
         const newProfilePictureRefPath = fileRef.fullPath;
-
+  
         await updateDoc(userDocRef, {
           username: username,
           email: email,
           profilePicture: newProfilePictureUrl,
           profilePictureRef: newProfilePictureRefPath,
         });
-
+  
         setProfilePicture(newProfilePictureUrl);
         navigate("/userhome");
+        window.location.reload(); // Refresh the page
       } catch (error) {
         console.error("Error updating user profile:", error);
       }
     } else {
       try {
+        // Check if there is an existing profile picture
+        const profilePictureUrl = userData.profilePicture || null;
+        const profilePictureRefPath = userData.profilePictureRef || null;
+  
         await updateDoc(userDocRef, {
           username: username,
           email: email,
-          profilePicture: userData.profilePicture
-            ? userData.profilePicture
-            : null,
-          profilePictureRef: userData.profilePictureRef
-            ? userData.profilePictureRef
-            : null,
+          profilePicture: profilePictureUrl,
+          profilePictureRef: profilePictureRefPath,
         });
         navigate("/userhome");
       } catch (error) {
@@ -98,6 +97,8 @@ const EditProfile = () => {
       }
     }
   };
+  
+  
 
   return (
     <div className={styles.container}>

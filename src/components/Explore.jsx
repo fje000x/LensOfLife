@@ -18,44 +18,54 @@ function ExplorePage() {
         // Array to store promises for fetching user details and image URLs
         const promises = [];
 
-        for (const docSnapshot of querySnapshot.docs) {
+        querySnapshot.docs.forEach((docSnapshot, index) => {
           const postData = docSnapshot.data();
           const userId = postData.uid;
 
-          // Fetch user details for each post (without awaiting)
+          // Fetch user details for each post
           const userDocRef = doc(db, 'users', userId);
-          const userPromise = getDoc(userDocRef);
+          const userPromise = getDoc(userDocRef).then(userDocSnapshot => {
+            if (userDocSnapshot.exists()) {
+              const userData = userDocSnapshot.data();
+              // Merge user data with post data
+              return { ...postData, username: userData.username, profilePicture: userData.profilePicture };
+            } else {
+              return { ...postData };
+            }
+          });
           promises.push(userPromise);
 
-          // Fetch image URL from Firebase Storage (without awaiting)
-          const imageUrlPromise = getDownloadURL(ref(storage, postData.imageUrl));
-          promises.push(imageUrlPromise);
-        }
+          // Check if imageUrl exists and is not an empty string
+          if (postData.imageUrl && postData.imageUrl.trim()) {
+            const imageUrlPromise = getDownloadURL(ref(storage, postData.imageUrl))
+              .then(imageUrl => {
+                return { imageUrl }; // Return an object with imageUrl
+              })
+              .catch(error => {
+                console.error(`Failed to get image URL for post ${docSnapshot.id}:`, error);
+                return { imageUrl: null }; // Handle missing or inaccessible image
+              });
+            promises.push(imageUrlPromise);
+          } else {
+            // Immediately resolve promise with null imageUrl for posts without an image
+            promises.push(Promise.resolve({ imageUrl: null }));
+          }
+        });
 
-        // Await all promises concurrently
+        // Await all promises concurrently and combine user and image data with post data
         const results = await Promise.all(promises);
 
-        // Process results in pairs (user detail, image URL)
-        for (let i = 0; i < results.length; i += 2) {
-          const userDocSnapshot = results[i];
-          const imageUrl = results[i + 1];
+        // Process results to combine user details and image URLs with post data
+        results.forEach((result, i) => {
+          // Every even index is user data, and the following odd index is the image URL
+          if (i % 2 === 0) { // User data with optional profilePicture and username
+            const postWithUserData = result;
+            const imageResult = results[i + 1];
+            const postWithAllData = { ...postWithUserData, ...imageResult, id: querySnapshot.docs[i / 2].id };
 
-          if (userDocSnapshot.exists()) {
-            const userData = userDocSnapshot.data();
-
-            const postData = querySnapshot.docs[i / 2].data();
-            const postWithUserAndImage = {
-              id: querySnapshot.docs[i / 2].id,
-              ...postData,
-              username: userData.username,
-              profilePicture: userData.profilePicture,
-              imageUrl: imageUrl,
-              description: postData.description // Pass the description here
-            };
-
-            fetchedPosts.push(postWithUserAndImage);
+            fetchedPosts.push(postWithAllData);
           }
-        }
+        });
 
         // Sort fetchedPosts by createdAt field in descending order
         fetchedPosts.sort((a, b) => b.createdAt - a.createdAt);
