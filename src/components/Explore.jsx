@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, getDoc, query, where, orderBy, limit } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { getAuth } from 'firebase/auth'; // Import getAuth to access the authenticated user
 import Post from './Post'; // Import the Post component
 
 function ExplorePage() {
@@ -11,14 +12,28 @@ function ExplorePage() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const postsRef = collection(db, 'posts');
-        const querySnapshot = await getDocs(postsRef);
+        const authUser = getAuth().currentUser;
+        if (!authUser) {
+          console.log("No authenticated user.");
+          return;
+        }
+
+        // Fetch the list of friends for the current authenticated user
+        const friendsSnapshot = await getDocs(collection(db, 'users', authUser.uid, 'friends'));
+        const friendIds = friendsSnapshot.docs.map(doc => doc.id);
+
+        // Add the current user's ID to the list of friend IDs
+        friendIds.push(authUser.uid);
+
+        // Query posts where the uid is in the list of friendIds
+        const q = query(collection(db, 'posts'), where('uid', 'in', friendIds), orderBy('createdAt', 'desc'), limit(10));
+        const querySnapshot = await getDocs(q);
         const fetchedPosts = [];
 
         // Array to store promises for fetching user details and image URLs
         const promises = [];
 
-        querySnapshot.docs.forEach((docSnapshot, index) => {
+        querySnapshot.forEach((docSnapshot, index) => {
           const postData = docSnapshot.data();
           const userId = postData.uid;
 
@@ -67,9 +82,7 @@ function ExplorePage() {
           }
         });
 
-        // Sort fetchedPosts by createdAt field in descending order
-        fetchedPosts.sort((a, b) => b.createdAt - a.createdAt);
-
+        // Set the fetched posts
         setPosts(fetchedPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);

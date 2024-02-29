@@ -1,0 +1,69 @@
+/* SearchFriends.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .searchInput {
+    padding: 10px;
+    margin: 10px 0;
+    width: 300px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 17px;
+  }
+  .h2{
+    color:white ;
+    font-weight: 300;
+  }
+  .searchButton, .addFriendButton , .added {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 1em;
+  }
+  
+  /* Adjust hover styles for buttons */
+  .searchButton:hover, .addFriendButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .userList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Styling for the added state */
+  .added {
+background-color: green;
+  }
+  .add
+  /* Ensure SVG icons in buttons align with text */
+  .addFriendButton svg, .added svg {
+    vertical-align: middle;
+    
+  }
+  
+  .userItem {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    background-color: #f8f9fa; /* Light background for user items */
+    color: black; /* Ensuring text is readable */
+  }
+  
+  .username {
+    margin-right: 10px;
+  }
+  

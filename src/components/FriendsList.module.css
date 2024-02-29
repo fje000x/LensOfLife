@@ -1,0 +1,32 @@
+/* FriendList.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color:white
+  }
+  
+  .friendsList {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px; /* Adjust based on your design */
+    
+  }
+  
+  .friendItem {
+   color:black ;
+    border: 1px solid #ddd;
+    background-color: azure;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+  }
+
+  
+  /* Add more styles as needed */

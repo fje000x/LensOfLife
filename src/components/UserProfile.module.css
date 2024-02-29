@@ -81,17 +81,15 @@
   }
   .imageContainer {
     /* Use CSS columns for a masonry-like layout */
-    column-count: 3;
-    column-gap: 1em;
-    
-   
+    column-count: 3; /* Adjust the number of columns as needed */
+    column-gap: 1em; /* Adjust the gap between columns */
   }
   
   .post {
     /* Break inside to avoid splitting individual posts across columns */
     break-inside: avoid;
-    margin-bottom: .2em;
-    border:1px solid gray;
+    margin-bottom: .2em; /* Adjust the margin between posts */
+    border: 1px solid gray; /* Add a border to each post for visual separation */
   }
   
   .postImage {

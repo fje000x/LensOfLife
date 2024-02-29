@@ -9,19 +9,27 @@ import EditProfile from './components/EditProfile';
 import ExplorePage from './components/Explore';
 import CreatePost from './components/CreatePost';
 import TopNavbar from './components/TopNavbar';
-
+import SearchFriends from './components/SearchFriends';
+import FriendList from './components/FriendsList';
+import UserProfile from './components/UserProfile';
 function App() {
   return (
     <>
      
       <Routes>
         <Route path='/' element={<HomePageView/>}/>
+        <Route path='/Search' element={<Protected><TopNavbar/><SearchFriends/> <Navbar /></Protected>}/>
+        <Route path='/friends' element={<Protected><TopNavbar/><FriendList/> <Navbar /></Protected>}/>
         <Route path='/home' element={<HomePageView/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/userhome' element={<Protected><TopNavbar/><UserHome/> <Navbar /></Protected>} />
         <Route path='/edit' element={<Protected><TopNavbar/><EditProfile/> <Navbar /></Protected>} />
         <Route path='/explore' element={<Protected><TopNavbar/><ExplorePage/> <Navbar /></Protected>} />
         <Route path='/create' element={<Protected><TopNavbar/><CreatePost/> <Navbar /></Protected>} />
+        <Route path="/profile/:username" element={<Protected><TopNavbar/><UserProfile/> <Navbar /></Protected>} />
+        
+     
+        
       </Routes>
     </>
   );

@@ -19,6 +19,7 @@ const EditProfile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
+  const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const EditProfile = () => {
           setUsername(data.username);
           setEmail(data.email);
           setProfilePicture(data.profilePicture);
+          setBio(data.bio);
           // No need to setUser as it's not used elsewhere
         }
       });
@@ -45,60 +47,19 @@ const EditProfile = () => {
     if (!auth.currentUser) return;
     const uid = auth.currentUser.uid;
     const userDocRef = doc(db, "users", uid);
-  
-    const userDoc = await getDoc(userDocRef);
-    const userData = userDoc.exists() ? userDoc.data() : {};
-  
-    // Delete the old profile picture if it exists and a new file is selected
-    if (userData.profilePictureRef && file) {
-      const oldFileRef = firebaseRef(storage, userData.profilePictureRef);
-      await deleteObject(oldFileRef).catch((error) => {
-        console.error("Error deleting old profile picture:", error);
+
+    try {
+      await updateDoc(userDocRef, {
+        username: username,
+        email: email,
+        profilePicture: profilePicture,
+        bio: bio, // Include bio field in update
       });
-    }
-  
-    if (file) {
-      try {
-        const uniqueFileName = `profilePictures/${uid}/${Date.now()}-${file.name}`;
-        const fileRef = firebaseRef(storage, uniqueFileName);
-  
-        await uploadBytes(fileRef, file);
-        const newProfilePictureUrl = await getDownloadURL(fileRef);
-        const newProfilePictureRefPath = fileRef.fullPath;
-  
-        await updateDoc(userDocRef, {
-          username: username,
-          email: email,
-          profilePicture: newProfilePictureUrl,
-          profilePictureRef: newProfilePictureRefPath,
-        });
-  
-        setProfilePicture(newProfilePictureUrl);
-        navigate("/userhome");
-        window.location.reload(); // Refresh the page
-      } catch (error) {
-        console.error("Error updating user profile:", error);
-      }
-    } else {
-      try {
-        // Check if there is an existing profile picture
-        const profilePictureUrl = userData.profilePicture || null;
-        const profilePictureRefPath = userData.profilePictureRef || null;
-  
-        await updateDoc(userDocRef, {
-          username: username,
-          email: email,
-          profilePicture: profilePictureUrl,
-          profilePictureRef: profilePictureRefPath,
-        });
-        navigate("/userhome");
-      } catch (error) {
-        console.error("Error updating user info:", error);
-      }
+      navigate("/userhome");
+    } catch (error) {
+      console.error("Error updating user info:", error);
     }
   };
-  
-  
 
   return (
     <div className={styles.container}>
@@ -129,6 +90,15 @@ const EditProfile = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
+        />
+      </div>
+      <div className={styles.inputWrappers}>
+        <p>Edit Bio</p>
+        <textarea
+          className={styles.inputField}
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          placeholder="Bio"
         />
       </div>
       <button className={styles.saveButton} onClick={handleSave}>
