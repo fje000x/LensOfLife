@@ -21,7 +21,7 @@ function TopNavbar(){
         <nav className={styles.navbar}>
           <ul className={styles.ul}>
             <li className={styles.logoItem}>Lens Of Life</li>
-            <li onClick={handleLogout} className={styles.items}>Logout</li>
+            <li onClick={handleLogout} className={styles.items}>Log out</li>
           </ul>
         </nav>
     )

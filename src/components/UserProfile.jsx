@@ -54,14 +54,16 @@ const UserProfile = () => {
       <div className={styles.container}>
         <div className={styles.imgContainer}>
           <img className={styles.profileImg} src={userProfile.profilePicture} alt="Profile" />
+         
         </div>
         <h3 className={styles.color}>{userProfile.username}</h3>
+        
         <p className={styles.bio}>{userProfile.bio}</p>
         <div className={styles.info}>
             
-        <Link to="/friends" className={styles.link}>
-            <p>{userProfile.friendsCount || 0} Friends </p>
-          </Link>
+       <Link to={`/profile/${username}/friends`} className={styles.link}>
+  <p>{userProfile.friendsCount || 0} Friends</p>
+</Link>
           <p>{userProfile.postsCount || 0} Posts </p>
         </div>
       </div>

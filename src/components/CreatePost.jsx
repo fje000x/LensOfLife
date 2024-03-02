@@ -13,6 +13,7 @@ const CreatePost = () => {
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // State to track submission status
   const navigate = useNavigate();
   const { addPost } = usePosts(); // Use the addPost function from the context
 
@@ -37,6 +38,8 @@ const CreatePost = () => {
       alert("A post must have an image");
       return;
     }
+
+    setIsSubmitting(true); // Set submitting state to true
 
     const uid = auth.currentUser.uid;
     const timestamp = Date.now();
@@ -69,6 +72,8 @@ const CreatePost = () => {
     } catch (error) {
       console.error("Error creating post:", error);
       alert("Error creating post. Please try again.");
+    } finally {
+      setIsSubmitting(false); // Reset submitting state after submission
     }
   };
 
@@ -96,8 +101,8 @@ const CreatePost = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button type="submit" className={styles.btn}>
-          Post
+        <button type="submit" className={styles.btn} disabled={isSubmitting}>
+          {isSubmitting ? 'Posting...' : 'Post'}
         </button>
       </form>
     </div>

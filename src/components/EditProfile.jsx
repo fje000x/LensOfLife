@@ -21,6 +21,7 @@ const EditProfile = () => {
   const [profilePicture, setProfilePicture] = useState("");
   const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0); // State for triggering refresh
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -37,29 +38,46 @@ const EditProfile = () => {
         }
       });
     }
-  }, [auth, db]);
+  }, [auth, db, refreshKey]); // Include refreshKey in the dependencies array
 
   const handleProfilePictureChange = (e) => {
     setFile(e.target.files[0]);
   };
 
   const handleSave = async () => {
-    if (!auth.currentUser) return;
+    if (!auth.currentUser || !db) return;
     const uid = auth.currentUser.uid;
     const userDocRef = doc(db, "users", uid);
-
+  
+    const uploadProfilePicture = async () => {
+      if (file) {
+        const fileRef = firebaseRef(storage, `profilePictures/${uid}`);
+        await uploadBytes(fileRef, file);
+        const newProfilePictureURL = await getDownloadURL(fileRef);
+        return newProfilePictureURL;
+      }
+      return profilePicture;
+    };
+  
     try {
+      const newProfilePictureURL = await uploadProfilePicture();
+  
       await updateDoc(userDocRef, {
         username: username,
         email: email,
-        profilePicture: profilePicture,
-        bio: bio, // Include bio field in update
+        profilePicture: newProfilePictureURL,
+        bio: bio,
       });
+  
       navigate("/userhome");
+  
+      // Force a full refresh of the page
+      window.location.reload();
     } catch (error) {
-      console.error("Error updating user info:", error);
+      console.error("Error updating user info or uploading new profile picture:", error);
     }
   };
+  
 
   return (
     <div className={styles.container}>

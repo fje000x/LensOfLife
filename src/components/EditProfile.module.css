@@ -1,53 +1,60 @@
-/* EditProfile.module.css */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #FDFCFA;
-    height:100vh;
-    
-  }
-  
-  .inputField {
-    margin-bottom: 2em;
-    padding: 1em;
-    border: 1px solid #ccc;
-    border-radius: 1em;
-    width: 100%; /* Adjusted to fill the width of its parent container */
-    box-sizing: border-box; /* Ensures padding doesn't add to the width */
-  }
-  
-  .profileImage {
-    background: none;
-    width: 8em; 
-    height: 8em;
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.4);
-    margin-bottom: 1em;
-  }
-  
-  .saveButton {
-    padding: 10px 20px;
-    background-color: slategray;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 70%; /* Optional: Adjust to match the width of the input fields */
-  }
-  
-  .saveButton:hover {
-    background-color: #0056b3;
-  }
-  
-  .inputWrappers {
-    display: flex;
-    flex-direction: column; /* Changed to column to stack label and input */
-    align-items: center; /* Center align items in the container */
-    width: 70%; /* Ensures that wrapper has the same width */
-    font-size: small;
-    margin-bottom: 1em; /* Ensures consistent spacing between groups */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  background-color: #F0F0F5;
+  height: 100vh;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+}
+
+.inputField {
+ 
+  padding: 1em;
+  border: 0.125em solid #DADCE0;
+  border-radius: 0.5em;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+  height: 3em;
+  background-color: #FFFFFF;
+  color: #333333;
+}
+
+.profileImage {
+  background: url('default-profile.png') no-repeat center center;
+  background-size: cover;
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2), 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+  margin-bottom: 1em;
+  border: 0.1875em solid #DADCE0;
+}
+
+.saveButton {
+  padding: 1em 1.5em;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 70%;
+  font-weight: 600;
+}
+
+.saveButton:hover {
+  background-color: #357ABD;
+  transform: translateY(-0.125em);
+}
+
+.inputWrappers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  font-size: 0.875em;
+  margin-bottom: 1em;
+  color: #333333;
+}

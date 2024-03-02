@@ -28,7 +28,88 @@
     text-decoration: none;
     color:black ;
   }
+  .commentContainer {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Username on the left, comment SVG on the right */
+    justify-content: space-between; /* Items on opposite ends */
+  }
 
+  .commentContainer svg {
+    grid-column: span 3; /* Make the SVG span 3 columns */
+    font-size: 1.3em;
+    margin-left:1em;
+  }
+  .commentsSection {
+    margin-top: 1em;
+    border-top:1px solid lightgrey
+
+  }
+  .comment {
+    margin-top:2em;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Add some margin between each comment */
+  }
+  .comment svg{
+    font-size: larger;
+    margin-left:2em ;
+  }
+  .comment button {
+    
+    background: none; /* Removes default background */
+    color: inherit; /* Inherits the text color from its parent */
+    border: none; /* Removes the border */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+    font: inherit; /* Inherits font properties from its parent */
+    cursor: pointer; /* Ensures the cursor changes to a pointer to indicate it's clickable */
+    outline: inherit; /* Inherits the outline style from its parent, you might want to customize this for accessibility */
+  }
+  .comment img {
+    width: 30px; /* Adjust the width of the user picture */
+    height: 30px; /* Adjust the height of the user picture */
+    border-radius: 50%; /* Ensure the user picture is rounded */
+    margin-right: 10px; /* Add some space between the picture and the username */
+  }
+  
+  .commentAuthor {
+    font-weight: bold;
+    margin-right: 5px;
+    font-size: 16px; /* Adjust the font size of the username */
+  }
+  
+  .commentText {
+    color: #333;
+    font-size: 16px; /* Adjust the font size of the comment text */
+  }
+  .addCommentForm {
+    margin-top: 20px;
+    display: flex;
+  }
+  
+  .addCommentForm input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .addCommentForm button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .addCommentForm button:hover {
+    background-color: #0056b3;
+  }
+  
   .img {
     width: 100%;
     max-height: 300px; /* Adjust as needed */
@@ -39,9 +120,9 @@
   }
   
   .profilePicture {
-    width: 40px; /* Adjust the size of the profile picture */
-    height: 40px; /* Adjust the size of the profile picture */
-    border-radius: 50%; /* Make it circular */
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
     margin-right: 10px;
   }
   

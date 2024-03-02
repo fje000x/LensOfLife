@@ -12,6 +12,7 @@ import TopNavbar from './components/TopNavbar';
 import SearchFriends from './components/SearchFriends';
 import FriendList from './components/FriendsList';
 import UserProfile from './components/UserProfile';
+import UserFriends from './components/UserFriends';
 function App() {
   return (
     <>
@@ -27,7 +28,9 @@ function App() {
         <Route path='/explore' element={<Protected><TopNavbar/><ExplorePage/> <Navbar /></Protected>} />
         <Route path='/create' element={<Protected><TopNavbar/><CreatePost/> <Navbar /></Protected>} />
         <Route path="/profile/:username" element={<Protected><TopNavbar/><UserProfile/> <Navbar /></Protected>} />
-        
+        <Route path="/profile/:username/friends" element={<Protected><TopNavbar/><UserFriends/> <Navbar /></Protected>}/>
+        <Route path="friends" element={<FriendList />} />
+      
      
         
       </Routes>

@@ -34,11 +34,11 @@ const FriendList = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Friends</h2>
+      <h2>My Friends</h2>
       <ul className={styles.friendsList}>
         {friends.map(friend => (
           <li key={friend.id} className={styles.friendItem}>
-            {friend.username} 
+            {friend.username} {/* Display additional friend info as needed */}
           </li>
         ))}
       </ul>
