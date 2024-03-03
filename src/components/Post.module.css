@@ -41,18 +41,27 @@
   }
   .commentsSection {
     margin-top: 1em;
-    border-top:1px solid lightgrey
+    border-top: 1px solid lightgrey;
+  }
 
-  }
   .comment {
-    margin-top:2em;
+    margin-top: 2em;
     display: flex;
-    align-items: center; /* Align items vertically */
-    margin-bottom: 10px; /* Add some margin between each comment */
+    align-items: center; /* Ensure vertical alignment */
+    justify-content: space-between; /* Space out main items */
+    width: 100%; /* Ensure the comment takes full width */
   }
-  .comment svg{
-    font-size: larger;
-    margin-left:2em ;
+
+  .commentContent {
+    flex-grow: 1; /* Allow the content to fill the space */
+    display: flex;
+    align-items: center; /* Align items vertically within the content */
+    justify-content: space-around; /* Evenly space out the profile, name, and any text */
+  }
+  
+  .comment svg {
+    flex-shrink: 0; /* Prevent the SVG from shrinking */
+    margin-left: 1em; /* Optional spacing to the left of the SVG */
   }
   .comment button {
     

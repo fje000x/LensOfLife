@@ -62,7 +62,7 @@ function HomePageView() {
       <div className={styles.container}>
         <form onSubmit={handleSignIn}>
           <img src="logo.webp" alt="Logo" />
-
+        
           <label htmlFor="username">Email</label>
           <input
             className={styles.input}
@@ -127,9 +127,10 @@ function HomePageView() {
           </div>
         </div>
         <h3>Create Your First Post </h3>
-        <div className={styles.buttons}>
-          <button onClick={() => navigate("/signup")}>Sign Up</button>
-          <button onClick={scrollToTop}>Login</button>
+        <div className={styles.links}>
+          <p onClick={() => navigate("/signup")}>Sign Up </p>
+          <p>or</p>
+          <p onClick={scrollToTop}>Login</p>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@
 .whole{
     letter-spacing: .1em; /* Global letter spacing */
     font-weight: lighter;
-    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    font-family:'roboto', Geneva, Tahoma, sans-serif ;
     
 }
 
@@ -14,7 +14,7 @@
     Container Styles 
 */
 .container {
-    background: linear-gradient(slategray, skyblue);
+    background: linear-gradient(#708090,rgba(0, 0, 0, 0.8));
     max-width: 100%;
     height: auto;
     display: flex;
@@ -40,77 +40,88 @@
     display: flex;
     flex-direction: column;
     width: 90%;
-    padding: 1.25em;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 0.625em;
-    box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.2);
+    max-width: 500px;
+    padding: 2em;
+    background-color: rgba(0, 0, 0, 0.8); /* Subtle transparency for depth */
+    border-radius: 8px; /* Soft edges for modernity */
+    box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3), /* Original shadow for depth */
+    0 0 15px rgba(255, 255, 255, 0.3), /* First layer of white glow */
+    0 0 30px rgba(255, 255, 255, 0.25), /* Second layer of white glow for more intensity */
+    0 0 45px rgba(255, 255, 255, 0.2); /* Third layer of white glow for extended spread */
     align-items: center;
     justify-content: center;
-    gap: 0.9375em;
+    gap: 1em;
+    margin: auto;
 }
 
 .container form input, .container form button {
-    width: 90%;
-    height: 2.8125em;
-    padding: 0 1.25em;
-    margin: 0.625em 0;
-    background-color: #222;
-    border: 0.125em solid #bbb;
+    width: 100%;
+    padding: 0.75em;
+    border: 2px solid transparent;
+    background-color: transparent;
+    border-radius: 4px;
     color: #fff;
-    border-radius: 1.5625em;
-    font-size: 17px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid #555; /* Slightly thicker for contrast */
 }
 
-.container form input:focus {
+.container form input:focus, .container form button:hover {
+    border-color: darkgray; /* Consistent focus color */
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 0.1875em rgba(52, 152, 219, 0.5);
-}
-
-.inputText {
-    font-size: smaller;
-}
-
-.container form label {
-    width: 90%;
-    text-align: left;
-    font-size: 0.875em;
-    font-weight: normal;
-    color: #bbb;
-    margin-bottom: -0.3125em;
 }
 
 .container form button {
     cursor: pointer;
-    background-color: #ADD8E6;
-    color: #222;
+    background-color: slategray; /* Unified button color for focus and hover */
+    color: #fff;
     font-weight: 600;
-    transition: background-color 0.2s ease-in-out;
+    border: none;
+    transition: background-color 0.2s, transform 0.1s ease-in-out;
+}
+
+.container form button:active {
+    transform: scale(0.98);
 }
 
 .container form button:hover {
-    background-color: #2980b9;
+    background-color: #2980b9; /* Darker shade for hover state */
 }
 
 .signup {
     cursor: pointer;
-    color: #FF7F50;
+    color: #FF7F50; /* Coral for standout sign-up link */
     text-decoration: none;
     font-weight: bold;
+    font-family:Garamond;
 }
 
 .container form p, .container form a {
-    color: #ddd;
+    color: #ddd; /* Light grey for readability */
     text-align: center;
 }
 
 .container form p a {
-    color: #3498db;
-    text-decoration: none;
+    color: #3498db; /* Match focus state for consistency */
+    text-decoration: underline; /* Underline for clarity as a link */
     font-weight: bold;
 }
 
+.container form label {
+    width: 100%; /* Align with input and button width */
+    text-align: left;
+    font-size: 0.875em; /* Slightly larger for readability */
+    font-weight: bold; /* Bold for label emphasis */
+    color: #bbb; /* Light grey for contrast */
+   
+}
+
+.loginMsg{
+    font-size: small;
+}
 .errorMessage  {
     color: red; /* Crimson red */
     background-color: slategray; /* Very light red/pink for background */
@@ -160,9 +171,6 @@
     border-radius: 20%;
     overflow: hidden;
     
-   
-    
-  
 }
 
 /* 
@@ -172,15 +180,13 @@
     overflow: hidden;
     flex:3 ;
     height:auto ;
-    background-color: #ADD8E6;
+    background-color: transparent;
     padding: 1em;
     flex: 0 0 auto;
     scroll-snap-align: start;
     border-radius: 20%;
     border:none ;
-    box-shadow: 
-    0px 0px 10px rgba(0, 0, 0, 0.5), /* Outer shadow with spread */
-    inset 0px 0px 10px rgba(0, 0, 0, 0.5); /* Inner shadow */
+
 }
     
     
@@ -196,13 +202,13 @@
     height: 10px;
     width: 10px;
     margin: 0 5px;
-    background-color: #444;
+    background-color:lightgray ;
     border-radius: 50%;
     display: inline-block;
   }
   
   .activeDot {
-    background-color: #ADD8E6; /* Change this color to your preferred active color */
+    background-color: slategrey; /* Change this color to your preferred active color */
   }
 
 .container2 h3 {
@@ -218,19 +224,26 @@
     font-size: larger;
     font-weight: bold;
     color: #FF7F50;
+    font-family:Garamond;
 }
 .container2 p {
-    font-weight: bold;
+    font-weight: lighter;
+  
+}
+.container2 h3 {
+    font-weight: 500;
 }
 
-
-.buttons {
+.links {
     display: flex;
     flex-direction: row;
     gap: 1em;
     width: 100%;
     align-items: center;
     justify-content: center;
+    color:white ;
+    font-size: smaller;
+    font-weight: 600;
    
 }
 
