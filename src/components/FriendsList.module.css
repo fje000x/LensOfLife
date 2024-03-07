@@ -27,6 +27,9 @@
     align-items: center;
    
   }
-
-  
-  /* Add more styles as needed */
+  .profilePicture{
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  margin-right: 10px;
+  }

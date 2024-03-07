@@ -4,14 +4,29 @@ import { getFirestore, collection, addDoc, query, orderBy, getDocs, serverTimest
 import styles from "./Post.module.css";
 import { getAuth } from "firebase/auth";
 
-const Post = ({ profilePicture, description, username, imageUrl, postId }) => {
+const Post = ({ profilePicture, description, username, imageUrl, postId,uid }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [userProfile, setUserProfile] = useState(null);
   const db = getFirestore();
   const currentUser = getAuth().currentUser;
+  
 
+  const deletePost = async () => {
+    if (currentUser?.uid !== uid) {
+      alert("You can only delete your own posts.");
+      return;
+    }
+  
+    try {
+      await deleteDoc(doc(db, 'posts', postId));
+      console.log('Post deleted successfully.');
+      navigate('/userhome');
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
   useEffect(() => {
     const fetchUserProfile = async () => {
       if (currentUser) {
@@ -32,6 +47,8 @@ const Post = ({ profilePicture, description, username, imageUrl, postId }) => {
     fetchUserProfile();
   }, [currentUser, db]);
   
+ 
+
 
   const fetchComments = async () => {
     if (!showComments || !postId) return;
@@ -94,18 +111,39 @@ const Post = ({ profilePicture, description, username, imageUrl, postId }) => {
 
   return (
     <div className={styles.postbox}>
-      <div className={styles.container}>
-        <img src={profilePicture} alt="Profile" className={styles.profilePicture} />
-        <Link to={`/profile/${username}`}>
-          <div className={styles.user}>{username}</div>
-        </Link>
-      </div>
+ <div className={styles.container}>
+  <img src={profilePicture} alt="Profile" className={styles.profilePicture} />
+  <div className={styles.userInfoAndDelete}>
+    {currentUser && currentUser.uid === uid ? (
+      <Link to="/userhome">
+        <div className={styles.user}>{username}</div>
+      </Link>
+    ) : (
+      <Link to={`/profile/${username}`}>
+        <div className={styles.user}>{username}</div>
+      </Link>
+    )}
+    {currentUser && currentUser.uid === uid && (
+      <svg onClick={deletePost} className={styles.deleteButton}stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M4 8h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8zm2 2v10h12V10H6zm3 2h2v6H9v-6zm4 0h2v6h-2v-6zM7 5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h5v2H2V5h5zm2-1v1h6V4H9z"></path></g></svg>
+      )}
+    
+  </div>
+</div>
       <img className={styles.img} src={imageUrl} alt="Post" />
       <div className={styles.commentContainer}>
         <p className={styles.description}>
-          <span className={styles.userDesc}>{username}</span> {description}
+        {currentUser && currentUser.uid === uid ? (
+      <Link to="/userhome">
+        <div className={styles.userDesc}>{username}</div>
+      </Link>
+    ) : (
+      <Link to={`/profile/${username}`}>
+        <div className={styles.userDesc}>{username}</div>
+      </Link>
+    )}
+          
         </p>
-
+        
         <div onClick={() => setShowComments(!showComments)} className={styles.commentIcon}>
         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M144 208c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zM256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"></path></svg>
         </div>
@@ -119,7 +157,15 @@ const Post = ({ profilePicture, description, username, imageUrl, postId }) => {
                 <div key={comment.id} className={styles.comment}>
                 <div className={styles.commentinfo}>
                   <img src={comment.profilePicture} alt="Profile" className={styles.commentProfilePicture} />
-                  <span className={styles.commentAuthor}>{comment.author}:</span>
+                  {currentUser && comment.uid === currentUser.uid ? (
+            <Link to="/userhome">
+              <span className={styles.commentAuthor}>{comment.author}:</span>
+            </Link>
+          ) : (
+            <Link to={`/profile/${comment.author}`}>
+              <span className={styles.commentAuthor}>{comment.author}:</span>
+            </Link>
+          )}
                   <span className={styles.commentText}>{comment.text}</span>
                   </div>
                   {currentUser && comment.uid === currentUser.uid && (

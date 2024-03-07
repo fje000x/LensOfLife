@@ -71,8 +71,10 @@ const UserProfile = () => {
         {userProfile.postsCount > 0 ? (
           userProfile.posts.map(post => (
             <div key={post.id} className={styles.post}>
-              <img src={post.imageUrl} alt="Post" className={styles.postImage} />
-            </div>
+    <Link to={`/post/${post.id}`}>
+      <img src={post.imageUrl} alt="Post" className={styles.postImage} />
+    </Link>
+  </div>
           ))
         ) : (
           <p>No posts found.</p>

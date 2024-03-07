@@ -13,6 +13,7 @@ import SearchFriends from './components/SearchFriends';
 import FriendList from './components/FriendsList';
 import UserProfile from './components/UserProfile';
 import UserFriends from './components/UserFriends';
+import PostDetail from './components/PostDetails';
 function App() {
   return (
     <>
@@ -29,8 +30,8 @@ function App() {
         <Route path='/create' element={<Protected><TopNavbar/><CreatePost/> <Navbar /></Protected>} />
         <Route path="/profile/:username" element={<Protected><TopNavbar/><UserProfile/> <Navbar /></Protected>} />
         <Route path="/profile/:username/friends" element={<Protected><TopNavbar/><UserFriends/> <Navbar /></Protected>}/>
-        <Route path="friends" element={<FriendList />} />
-      
+        <Route path="friends" element={<Protected><TopNavbar/><FriendList/> <Navbar /></Protected>} />
+        <Route path="/post/:id" element={<Protected><TopNavbar/><PostDetail/> <Navbar /></Protected>} /> 
      
         
       </Routes>

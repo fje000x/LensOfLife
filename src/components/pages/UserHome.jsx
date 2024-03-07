@@ -17,6 +17,9 @@ function UserHome() {
   const [posts, setPosts] = useState([]);
   const [friendsCount, setFriendsCount] = useState(0); // State to hold the count of friends
   
+  const logPostId = (postId)=>{
+    console.log(postId)
+  }
   const fetchFriendsCount = async () => {
     const user = auth.currentUser;
     if (user) {
@@ -99,6 +102,10 @@ function UserHome() {
     return <Loading />;
   }
 
+ 
+
+  
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -120,11 +127,13 @@ function UserHome() {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        {posts.map(post => (
-          <div key={post.id} className={styles.post}>
-            <img src={post.imageUrl} alt="Post" className={styles.postImage} />
-          </div>
-        ))}
+      {posts.map(post => (
+  <div key={post.id} className={styles.post}>
+    <Link to={`/post/${post.id}`}>
+      <img src={post.imageUrl} alt="Post" className={styles.postImage} />
+    </Link>
+  </div>
+))}
       </div>
     </div>
   );
