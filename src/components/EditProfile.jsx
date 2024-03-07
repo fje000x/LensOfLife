@@ -17,7 +17,7 @@ const EditProfile = () => {
   const storage = getStorage();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  
   const [profilePicture, setProfilePicture] = useState("");
   const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
@@ -31,7 +31,7 @@ const EditProfile = () => {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setUsername(data.username);
-          setEmail(data.email);
+          
           setProfilePicture(data.profilePicture);
           setBio(data.bio);
           // No need to setUser as it's not used elsewhere
@@ -64,7 +64,6 @@ const EditProfile = () => {
   
       await updateDoc(userDocRef, {
         username: username,
-        email: email,
         profilePicture: newProfilePictureURL,
         bio: bio,
       });
@@ -91,14 +90,7 @@ const EditProfile = () => {
         />
       </div>
       <div className={styles.inputWrappers}>
-        <p>Edit Email</p>
-        <input
-          className={styles.inputField}
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
+       
       </div>
       <div className={styles.inputWrappers}>
         <p>Edit Username</p>

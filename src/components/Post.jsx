@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getFirestore, collection, addDoc, query, orderBy, getDocs, serverTimestamp, doc, getDoc, deleteDoc } from "firebase/firestore";
 import styles from "./Post.module.css";
 import { getAuth } from "firebase/auth";
-
+import { useNavigate } from "react-router-dom";
 const Post = ({ profilePicture, description, username, imageUrl, postId,uid }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
@@ -11,7 +11,7 @@ const Post = ({ profilePicture, description, username, imageUrl, postId,uid }) =
   const [userProfile, setUserProfile] = useState(null);
   const db = getFirestore();
   const currentUser = getAuth().currentUser;
-  
+  const navigate = useNavigate()
 
   const deletePost = async () => {
     if (currentUser?.uid !== uid) {
@@ -22,7 +22,9 @@ const Post = ({ profilePicture, description, username, imageUrl, postId,uid }) =
     try {
       await deleteDoc(doc(db, 'posts', postId));
       console.log('Post deleted successfully.');
-      navigate('/userhome');
+     
+        navigate('/userhome');
+      
     } catch (error) {
       console.error('Error deleting post:', error);
     }
@@ -88,6 +90,7 @@ const Post = ({ profilePicture, description, username, imageUrl, postId,uid }) =
         profilePicture: userProfile.profilePicture, // Use the profile picture from Firestore user profile
         createdAt: serverTimestamp(),
         uid: currentUser.uid, // Store the UID of the user who made the comment
+        
       });
       setNewComment("");
 
@@ -139,9 +142,11 @@ const Post = ({ profilePicture, description, username, imageUrl, postId,uid }) =
     ) : (
       <Link to={`/profile/${username}`}>
         <div className={styles.userDesc}>{username}</div>
+        
       </Link>
+      
     )}
-          
+         <div className={styles.userDesc}>{description}</div> {/* Add this line */}   
         </p>
         
         <div onClick={() => setShowComments(!showComments)} className={styles.commentIcon}>

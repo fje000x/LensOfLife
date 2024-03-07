@@ -4,11 +4,14 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { getAuth } from 'firebase/auth'; // Import getAuth to access the authenticated user
 import Post from './Post'; // Import the Post component
 
+
 function ExplorePage() {
   const [posts, setPosts] = useState([]);
   const db = getFirestore();
   const storage = getStorage();
-
+  const [lastVisible, setLastVisible] = useState(null); // Track the last document
+  const [hasMore, setHasMore] = useState(true); // Track if there are more posts to load
+  
   useEffect(() => {
     const fetchPosts = async () => {
       try {

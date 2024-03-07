@@ -14,6 +14,7 @@ import FriendList from './components/FriendsList';
 import UserProfile from './components/UserProfile';
 import UserFriends from './components/UserFriends';
 import PostDetail from './components/PostDetails';
+import WorldExplore from './components/WorldExplore';
 function App() {
   return (
     <>
@@ -23,10 +24,11 @@ function App() {
         <Route path='/Search' element={<Protected><TopNavbar/><SearchFriends/> <Navbar /></Protected>}/>
         <Route path='/friends' element={<Protected><TopNavbar/><FriendList/> <Navbar /></Protected>}/>
         <Route path='/home' element={<HomePageView/>}/>
+        <Route path='/explore' element={<Protected><TopNavbar/><WorldExplore/> <Navbar /></Protected>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/userhome' element={<Protected><TopNavbar/><UserHome/> <Navbar /></Protected>} />
         <Route path='/edit' element={<Protected><TopNavbar/><EditProfile/> <Navbar /></Protected>} />
-        <Route path='/explore' element={<Protected><TopNavbar/><ExplorePage/> <Navbar /></Protected>} />
+        <Route path='/homepage' element={<Protected><TopNavbar/><ExplorePage/> <Navbar /></Protected>} />
         <Route path='/create' element={<Protected><TopNavbar/><CreatePost/> <Navbar /></Protected>} />
         <Route path="/profile/:username" element={<Protected><TopNavbar/><UserProfile/> <Navbar /></Protected>} />
         <Route path="/profile/:username/friends" element={<Protected><TopNavbar/><UserFriends/> <Navbar /></Protected>}/>

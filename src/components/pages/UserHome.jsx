@@ -16,10 +16,8 @@ function UserHome() {
   const db = getFirestore();
   const [posts, setPosts] = useState([]);
   const [friendsCount, setFriendsCount] = useState(0); // State to hold the count of friends
-  
-  const logPostId = (postId)=>{
-    console.log(postId)
-  }
+
+
   const fetchFriendsCount = async () => {
     const user = auth.currentUser;
     if (user) {
@@ -41,14 +39,13 @@ function UserHome() {
           const docSnap = await getDoc(userDocRef);
           if (docSnap.exists()) {
             const userData = docSnap.data();
+            // Save user data in local storage
+            localStorage.setItem('userData', JSON.stringify(userData));
+            // Update state with user data
             setUsername(userData.username);
             setProfilePicture(userData.profilePicture);
             setEmail(userData.email);
-            setBio(userData.bio)
-            localStorage.setItem('username', userData.username);
-            localStorage.setItem('email', userData.email);
-            localStorage.setItem('profilePicture', userData.profilePicture);
-            localStorage.setItem('bio', userData.bio);
+            setBio(userData.bio);
           } else {
             console.log("No such document!");
           }
@@ -130,7 +127,7 @@ function UserHome() {
       {posts.map(post => (
   <div key={post.id} className={styles.post}>
     <Link to={`/post/${post.id}`}>
-      <img src={post.imageUrl} alt="Post" className={styles.postImage} />
+      <img src={post.imageUrl} alt="Post" className={styles.postImage} loading='lazy' />
     </Link>
   </div>
 ))}

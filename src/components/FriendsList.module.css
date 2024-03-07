@@ -9,27 +9,44 @@
   
   .friendsList {
     list-style-type: none;
-    padding: 0;
+    padding: 1em;
     width: 100%;
     max-width: 600px; /* Adjust based on your design */
     
   }
   
   .friendItem {
-   color:black ;
-    border: 1px solid #ddd;
-    background-color: azure;
-    border-radius: 8px;
-    padding: 10px 15px;
-    margin: 10px 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-   
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 1em;
+    background-color: #222;
+    border-radius: 1em;
+    
   }
-  .profilePicture{
-  width: 40px; 
-  height: 40px; 
-  border-radius: 50%; 
-  margin-right: 10px;
+
+  .friendInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap between the profile picture and username as needed */
+    
+    
   }
+  
+  .profilePicture {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%; /* Makes the image circular */
+  }
+  
+  .usernameLink {
+    text-decoration: none;
+    color:whitesmoke
+  }
+  
+  .deleteButton {
+    cursor: pointer;
+    /* Add any additional styling as needed */
+  }
+  

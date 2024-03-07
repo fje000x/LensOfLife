@@ -5,18 +5,21 @@
   width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: #FDFCFA;
+  
 
 }
 
 .container {
   width: 100%;
-  height: 30vh;
+  height: 35vh;
   color: #00072D;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-bottom: 1px solid slategray;
+ 
+  
 }
 
 .imgContainer {
@@ -58,7 +61,7 @@
 }
 
 .info a {
-  text-decoration: underline;
+  text-decoration: none;
   color: black;
   font-weight: 300;
 }

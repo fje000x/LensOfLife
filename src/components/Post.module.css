@@ -20,7 +20,7 @@
     
     justify-content: space-between;
   }
-  .deletebutt
+ 
   .user {
     font-size: 16px;
     font-weight: bold;
@@ -86,12 +86,7 @@
     margin-right: 10px; /* Add some space between the picture and the username */
   }
   
-  .commentAuthor {
-    font-weight: bold;
-    margin-right: 5px;
-    font-size: 16px; /* Adjust the font size of the username */
-  }
-  
+
   .commentText {
     color: #333;
     font-size: 16px; /* Adjust the font size of the comment text */
@@ -161,5 +156,27 @@
   margin-left: auto; /* Pushes the button to the far right */
   cursor: pointer;
   font-size: larger;
-  /* Other styling as needed */
+ 
 }
+
+.commentinfo {
+  display: flex;
+  align-items: center; /* This aligns the items vertically in the center */
+  justify-content: start; /* This aligns the items to start, but you can use space-between if you want equal spacing */
+  gap: 10px; /* Adjust the gap as necessary */
+}
+
+.commentProfilePicture {
+  width: 40px;
+  height: 40px; 
+  border-radius: 50%; /* This makes the image round */
+}
+
+.commentAuthor {
+  flex-grow: 1; 
+}
+
+.commentText {
+  flex-grow: 2; 
+}
+
